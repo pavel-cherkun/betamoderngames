@@ -31,9 +31,50 @@
     {
       "id": "words",
       "name": "Слова"
+    },
+    {
+      "id": "arcade",
+      "name": "Аркады"
     }
   ],
   "games": [
+    {
+      "id": "samokat",
+      "title": "Самокат. Последнее лето",
+      "hook": "Зима близко. Прокатись на кикшеринге, пока тепло.",
+      "genres": [
+        "arcade"
+      ],
+      "platform": "phone",
+      "orientation": "landscape",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/samokat/",
+      "repo": "pavel-cherkun/samokat",
+      "world": "V-002",
+      "accent": "#FFC714",
+      "description": "Симулятор летней езды на электросамокате от первого лица. Бесконечная солнечная улица, три шеринговых самоката, бабушки, голуби, люки и двери машин, которые открываются прямо в велополосу.",
+      "features": [
+        "Руль двумя пальцами",
+        "Три самоката: жёлтый, фиолетовый, оранжево-чёрный",
+        "Бесконечная процедурная улица",
+        "Множитель за чистую езду и рекорд"
+      ],
+      "controls": "Два пальца как руль: левый вверх, правый вниз — направо. Газ сам, отпустить — тормоз",
+      "icon": null,
+      "cover": "assets/games/samokat/1.jpg",
+      "shots": [
+        "assets/games/samokat/1.jpg",
+        "assets/games/samokat/2.jpg",
+        "assets/games/samokat/3.jpg"
+      ],
+      "video": null,
+      "poster": null,
+      "focus": "50% 50%",
+      "source": "ПЕТ-ПРОЕКТЫ/Самокат",
+      "tg": {
+        "post": null
+      }
+    },
     {
       "id": "katars",
       "title": "Катарсалгос",
