@@ -1,0 +1,33 @@
+name: Оценки из Telegram
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telegram-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/telegram-sync.mjs
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_SALT: ${{ secrets.TG_SALT }}
+          TG_ADMIN_ID: ${{ vars.TG_ADMIN_ID }}
+      - name: Сохранить, если что-то поменялось
+        run: |
+          git config user.name "betamodern-bot"
+          git config user.email "betamodern-bot@users.noreply.github.com"
+          git add data/ratings.json data/tg-state.json
+          if ! git diff --cached --quiet; then git commit -m "Оценки из Telegram" && git push; fi

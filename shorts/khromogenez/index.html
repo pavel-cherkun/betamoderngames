@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Хромогенез</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e3e6ec;--field:#d0d5de;--field-rgb:208,213,222;--ink:#161b2e;--muted:#596178;--line:rgba(22,27,46,.14);--panel:#eceef3;--sel:#161b2e;color-scheme:light;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1226;--field:#060816;--field-rgb:6,8,22;--ink:#e6e8f5;--muted:#8a90ad;--line:rgba(230,232,245,.13);--panel:#151a33;--sel:#ffffff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1226;--field:#060816;--field-rgb:6,8,22;--ink:#e6e8f5;--muted:#8a90ad;--line:rgba(230,232,245,.13);--panel:#151a33;--sel:#ffffff;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:14px;line-height:1.35;display:flex;flex-direction:column;overflow:hidden;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+header{padding:10px 14px 8px;display:flex;flex-direction:column;gap:8px}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+h1{font-family:Unbounded,"Golos Text",system-ui,sans-serif;font-weight:700;font-size:17px;margin:0;letter-spacing:-.01em;background:linear-gradient(90deg,hsl(0 90% 55%),hsl(60 90% 50%),hsl(120 80% 45%),hsl(190 90% 50%),hsl(250 85% 62%),hsl(300 85% 58%));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ttl{display:flex;align-items:center;gap:8px}
+.qb{appearance:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 13px/1 "Golos Text",sans-serif;cursor:pointer;padding:0}
+.qb:focus-visible{outline:2px solid var(--sel);outline-offset:2px}
+.stats{display:flex;gap:14px;font-variant-numeric:tabular-nums}
+.stat{display:flex;flex-direction:column;align-items:flex-end}
+.stat b{font-family:Unbounded,"Golos Text",sans-serif;font-weight:500;font-size:14px}
+.stat span{font-size:11px;color:var(--muted)}
+.pop{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--field)}
+.pop i{display:block;height:100%;transition:width .3s}
+.harm{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.harm b{color:var(--ink);font-weight:600}
+#stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 8px}
+canvas{image-rendering:pixelated;image-rendering:crisp-edges;touch-action:none;border-radius:6px;background:var(--field);display:block}
+.dock{padding:8px 10px 10px;display:flex;flex-direction:column;gap:8px;background:var(--panel);border-top:1px solid var(--line)}
+.info{min-height:54px;font-size:13px}
+.info .nm{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
+.info .nm em{font-style:normal;font-weight:400;color:var(--muted)}
+.info p{margin:2px 0 3px;color:var(--ink);opacity:.85}
+.rel{display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.rel span{display:inline-flex;align-items:center;gap:4px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none}
+.pal{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.sw{appearance:none;border:0;padding:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:var(--muted);font:500 9px/1 "Golos Text",sans-serif;font-variant-numeric:tabular-nums}
+.sw i{display:block;width:100%;aspect-ratio:1;border-radius:7px;box-shadow:inset 0 0 0 2px transparent;transition:transform .12s}
+.sw.on i{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--sel);transform:scale(.92)}
+.sw.dead i{opacity:.28;outline:1.5px dashed var(--ink);outline-offset:-3px}
+.sw.dead{color:var(--ink);font-weight:600}
+.tools{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.tb{appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:6px 0 5px;display:flex;flex-direction:column;align-items:center;gap:2px;font:500 10px/1.1 "Golos Text",sans-serif;cursor:pointer}
+.tb .ic{font-size:17px;line-height:1}
+.tb.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tb:focus-visible,.sw:focus-visible{outline:2px solid var(--sel);outline-offset:2px}
+#rules{position:fixed;inset:0;background:var(--bg);z-index:20;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 18px calc(env(safe-area-inset-bottom,0px) + 24px);display:none}
+#rules.open{display:block}
+#rules .wrap{max-width:560px;margin:0 auto}
+#rules h2{font-family:Unbounded,sans-serif;font-weight:700;font-size:20px;margin:6px 0 10px}
+#rules h3{font-family:Unbounded,sans-serif;font-weight:500;font-size:14px;margin:22px 0 6px}
+#rules p{margin:0 0 10px;line-height:1.5;max-width:62ch}
+.row{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.row .dot{width:18px;height:18px;border-radius:5px;margin-top:1px}
+.row b{font-weight:600}.row small{color:var(--muted);font-size:12px}
+.close{position:sticky;top:0;float:right;appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:8px 14px;font:500 13px "Golos Text",sans-serif;cursor:pointer}
+@media (min-width:700px){.dock{max-width:620px;margin:0 auto 10px;border:1px solid var(--line);border-radius:14px;width:calc(100% - 20px)}header{max-width:620px;width:100%;margin:0 auto}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top"><div class="ttl"><h1>Хромогенез</h1><button class="qb" id="bRules" aria-label="Правила">?</button></div>
+  <div class="stats">
+   <div class="stat"><b id="sTick">0</b><span>такт</span></div>
+   <div class="stat"><b id="sPop">0</b><span>живых</span></div>
+   <div class="stat"><b id="sCol">12/12</b><span>цветов</span></div>
+  </div></div>
+ <div class="pop" id="pop"></div>
+ <div class="harm"><span>Гармония: <b id="hNow">0</b> тактов все 12 живы</span><span>рекорд <b id="hBest">0</b></span></div>
+</header>
+<div id="stage"><canvas id="cv"></canvas></div>
+<div class="dock">
+ <div class="info" id="info"></div>
+ <div class="pal" id="pal"></div>
+ <div class="tools">
+  <button class="tb on" data-tool="brush"><span class="ic">🖌️</span>Кисть</button>
+  <button class="tb" data-tool="bolt"><span class="ic">⚡</span>Молния</button>
+  <button class="tb" data-tool="bless"><span class="ic">✨</span>Благодать</button>
+  <button class="tb" id="bSize"><span class="ic">◉</span><span id="lSize">Кисть 3</span></button>
+  <button class="tb" id="bPlay"><span class="ic" id="iPlay">⏸</span><span id="lPlay">Пауза</span></button>
+  <button class="tb" id="bSpeed"><span class="ic">⏩</span><span id="lSpeed">×1</span></button>
+  <button class="tb" id="bNew"><span class="ic">🌍</span>Новый мир</button>
+  <button class="tb" id="bClear"><span class="ic">🧹</span>Очистить</button>
+ </div>
+</div>
+<div id="rules"><div class="wrap">
+ <button class="close" id="bClose">Закрыть</button>
+ <h2>Правила мира</h2>
+ <p>Каждый пиксель живёт сам: двигается, ест, размножается и умирает. Всё его поведение записано в цвете.</p>
+ <h3>Закон цвета</h3>
+ <p>Спектр замкнут в кольцо от красного до пурпурного. Каждый цвет может атаковать только три цвета, идущих за ним по кольцу, и сам уязвим для трёх предыдущих. Как именно он атакует, решает его роль.</p>
+ <h3>Вы — бог</h3>
+ <p>Кисть творит выбранный цвет. Молния стирает всё в круге. Благодать возвращает живым полную энергию и молодость. Очистить оставляет пустой холст: пустота перестаёт сама зажигать Солнца и рождать Маток, пока вы не создадите новый мир. Яркость пикселя — его сытость.</p>
+ <p>Теснота: чем больше пикселей одного цвета, тем реже он размножается и распространяется. Поэтому ни один цвет не может захватить мир целиком.</p>
+ <p>Цель — Гармония: держите все 12 цветов живыми как можно дольше. Вымерший цвет в палитре становится пунктирным.</p>
+ <h3>Двенадцать ролей</h3>
+ <div id="rlist"></div>
+</div></div>
+<script>
+const NT=12;
+const MAXAGE=[400,12,220,300,1200,600,400,1000,65000,60,1200,350];
+const META=[0.4,0,0,0.25,0,0.15,0.12,0.05,0,0,0,0.2];
+const DX=[-1,0,1,-1,1,-1,0,1], DY=[-1,-1,-1,0,0,1,1,1];
+const DIRK=[0,1,2,3,-1,4,5,6,7];
+const SC=[];for(let dy=-4;dy<=4;dy++)for(let dx=-4;dx<=4;dx++)if(dx||dy)SC.push([dx,dy,dx*dx+dy*dy]);SC.sort((a,b)=>a[2]-b[2]);
+const SC2=SC.filter(o=>Math.max(Math.abs(o[0]),Math.abs(o[1]))<=2);
+const SC3=SC.filter(o=>Math.max(Math.abs(o[0]),Math.abs(o[1]))<=3);
+const counts=new Int32Array(12),cap=new Float32Array(12).fill(1);let CAPK=0.04,voidLife=true;function rarest(){let m=1e9,r=0;for(let t=0;t<12;t++)if(counts[t]<m){m=counts[t];r=t}return r}
+let W,H,N,type,en,age,dir,stamp,order,nbr,tick=0;
+function rnd(n){return(Math.random()*n)|0}
+function initWorld(w,h){W=w;H=h;N=W*H;type=new Int8Array(N).fill(-1);en=new Float32Array(N);age=new Uint16Array(N);dir=new Uint8Array(N);stamp=new Uint32Array(N);order=new Int32Array(N);nbr=new Int32Array(N*8);tick=0;
+ for(let i=0;i<N;i++){order[i]=i;const x=i%W,y=(i/W)|0;for(let k=0;k<8;k++)nbr[i*8+k]=((y+DY[k]+H)%H)*W+(x+DX[k]+W)%W;}}
+const SEEDW=[1,0.2,3,1.2,3,1,0.8,0.8,0.5,0.25,0.15,0.6];
+function seedWorld(density){const tot=SEEDW.reduce((a,b)=>a+b,0);type.fill(-1);
+ for(let i=0;i<N;i++){if(Math.random()<density){let r=Math.random()*tot,t=0;while(r>SEEDW[t]){r-=SEEDW[t];t++}spawn(i,t,20+rnd(20));age[i]=rnd(50)}}}
+function canEat(a,b){if(b<0)return false;const d=(b-a+12)%12;return d>=1&&d<=3&&(b!==8||a===6)}
+function emptyNb(i){const b=i*8,s=rnd(8);for(let k=0;k<8;k++){const j=nbr[b+((s+k)&7)];if(type[j]<0)return j}return -1}
+function preyNb(i,a){const b=i*8,s=rnd(8);for(let k=0;k<8;k++){const j=nbr[b+((s+k)&7)];if(canEat(a,type[j]))return j}return -1}
+function occN(i){let n=0;const b=i*8;for(let k=0;k<8;k++)if(type[nbr[b+k]]>=0)n++;return n}
+function move(i,j){type[j]=type[i];en[j]=en[i];age[j]=age[i];dir[j]=dir[i];stamp[j]=tick;type[i]=-1;return j}
+function spawn(j,t,e){type[j]=t;en[j]=e;age[j]=0;dir[j]=rnd(8);stamp[j]=tick}
+function eat(i,j,m,b){en[i]=Math.min(100,en[i]+en[j]*m+b);type[j]=-1}
+function wander(i){const j=emptyNb(i);return j>=0?move(i,j):i}
+function breed(i,thr){if(en[i]>thr&&Math.random()<cap[type[i]]){const j=emptyNb(i);if(j>=0){en[i]/=2;spawn(j,type[i],en[i])}}}
+function stepTo(i,dx,dy){const sx=Math.sign(dx),sy=Math.sign(dy);const k=DIRK[(sy+1)*3+sx+1];if(k<0)return i;const j=nbr[i*8+k];if(type[j]<0)return move(i,j);
+ const k2=Math.random()<.5?DIRK[(sy+1)*3+1]:DIRK[4+sx];if(k2>=0){const j2=nbr[i*8+k2];if(type[j2]<0)return move(i,j2)}return i}
+function seek(i,a,list){const x=i%W,y=(i/W)|0;for(let n=0;n<list.length;n++){const o=list[n];const j=((y+o[1]+H)%H)*W+(x+o[0]+W)%W;if(canEat(a,type[j]))return stepTo(i,o[0],o[1])}return -1}
+const B=[];
+B[0]=i=>{let p=preyNb(i,0);if(p>=0&&Math.random()<.5){eat(i,p,.5,10);breed(i,80);return}if(Math.random()<.6){let r=seek(i,0,SC2);if(r<0)wander(i)}};
+B[1]=i=>{const b=i*8;for(let k=0;k<8;k++){const j=nbr[b+k];if(canEat(1,type[j])&&Math.random()<.09*cap[1])spawn(j,1,5)}};
+B[2]=i=>{en[i]+=1*(1-occN(i)/8);if(en[i]>30&&Math.random()<cap[2]){const j=emptyNb(i);if(j>=0){en[i]-=15;spawn(j,2,12)}}};
+B[3]=i=>{let p=preyNb(i,3);if(p>=0){eat(i,p,.6,6);breed(i,45);return}
+ if(Math.random()<.5){let r=seek(i,3,SC3);if(r>=0)return}
+ const x=i%W,y=(i/W)|0;let sx=0,sy=0,c=0;for(const o of SC3){const j=((y+o[1]+H)%H)*W+(x+o[0]+W)%W;if(type[j]===3){sx+=o[0];sy+=o[1];c++}}
+ if(c>0&&c<9&&Math.random()<.7)stepTo(i,sx,sy);else if(Math.random()<.5)wander(i)};
+B[4]=i=>{en[i]+=.4*(1-occN(i)/8);if(en[i]>50&&Math.random()<.1*cap[4]){const j=emptyNb(i);if(j>=0){en[i]-=30;spawn(j,4,20)}}};
+B[5]=i=>{const b=i*8;let sym=0,w=-1,we=30;for(let k=0;k<8;k++){const j=nbr[b+k],t=type[j];if(t===2||t===4)sym++;if(t>=0&&t!==8&&t!==5&&en[j]<we){we=en[j];w=j}}
+ en[i]=Math.min(100,en[i]+.12*sym);if(w>=0&&en[i]>40){en[i]-=3;en[w]+=3}breed(i,70);if(sym<2&&Math.random()<.6)wander(i)};
+B[6]=i=>{for(let s=0;s<2;s++){const j=nbr[i*8+dir[i]];const t=type[j];if(t<0){i=move(i,j);en[i]+=.12}else if(t===8){en[j]-=4;en[i]=Math.min(100,en[i]+3);if(en[j]<=0)type[j]=-1;dir[i]=rnd(8);break}else if(canEat(6,t)){eat(i,j,.6,8)}else{dir[i]=rnd(8);break}}
+ if(en[i]>60&&Math.random()<cap[6]){const j=nbr[i*8+(7-dir[i])];if(type[j]<0){en[i]/=2;spawn(j,6,en[i]);dir[j]=7-dir[i]}}};
+B[7]=i=>{let p=preyNb(i,7);if(p>=0&&(type[p]!==10||Math.random()<.3)){eat(i,p,.8,10);breed(i,60);return}const b=i*8;let st=0,oc=0;for(let k=0;k<8;k++){const t=type[nbr[b+k]];if(t===8)st++;if(t>=0)oc++}
+ en[i]+=.03+.08*st;if(oc===0&&Math.random()<.2)wander(i);breed(i,60)};
+B[8]=i=>{};
+B[9]=i=>{const b=i*8;for(let k=0;k<8;k++){const j=nbr[b+k];if(canEat(9,type[j])&&Math.random()<.35*cap[9])spawn(j,9,10)}if(Math.random()<.15)wander(i)};
+B[10]=i=>{en[i]+=.3;let p=preyNb(i,10);if(p>=0)eat(i,p,.8,15);if(en[i]>40){const j=emptyNb(i);if(j>=0){let t=Math.random()<.5?rarest():rnd(12);if(t===8&&Math.random()<.5)t=rnd(12);spawn(j,t,20);en[i]-=25}}if(Math.random()<.3)wander(i)};
+B[11]=i=>{let p=preyNb(i,11);if(p>=0&&en[p]>8){en[p]-=3;en[i]=Math.min(100,en[i]+2.5);if(en[p]<=0){type[p]=-1;if(en[i]>50&&Math.random()<cap[11]){en[i]/=2;spawn(p,11,en[i])}}return}
+ let r=seek(i,11,SC2);if(r<0&&Math.random()<.5)wander(i)};
+function step(){tick++;const t=tick;if(voidLife){const sp=Math.max(1,N*.0002|0);for(let q=0;q<sp;q++){const j=rnd(N);if(type[j]<0)spawn(j,2,10)}if(Math.random()<N*.00006){const j=rnd(N);if(type[j]===4||type[j]===2)spawn(j,1,5)}if(Math.random()<N*.000003){const j=rnd(N);if(type[j]<0)spawn(j,10,30)}}counts.fill(0);for(let i=0;i<N;i++){const q=type[i];if(q>=0)counts[q]++}const K=N*CAPK;for(let q=0;q<12;q++)cap[q]=Math.min(1,K/(counts[q]+1));for(let n=N-1;n>0;n--){const m=rnd(n+1),v=order[n];order[n]=order[m];order[m]=v}
+ for(let n=0;n<N;n++){const i=order[n],ty=type[i];if(ty<0||stamp[i]===t)continue;stamp[i]=t;if(ty===8)continue;
+  age[i]++;en[i]-=META[ty];if(age[i]>MAXAGE[ty]||en[i]<=0){type[i]=-1;continue}B[ty](i)}}
+const NAMES=['Красный','Оранжевый','Жёлтый','Лаймовый','Зелёный','Изумрудный','Бирюзовый','Голубой','Синий','Индиго','Фиолетовый','Пурпурный'];
+const ROLES=['Хищник','Пламя','Солнце','Рой','Лес','Лекарь','Поток','Страж','Камень','Чума','Матка','Вампир'];
+const DESC=[
+'Чует добычу в двух клетках, догоняет и съедает. Сытый делится надвое.',
+'Стоит на месте и поджигает соседей, гаснет через десять тактов. Молния сама поджигает Лес и Солнце.',
+'Копит свет и почкуется в пустоту. Иногда зажигается само. Основа пищи.',
+'Держится стаей и плодится быстро, если рядом есть еда.',
+'Медленно разрастается и живёт дольше всех живых.',
+'Подпитывается рядом с Солнцем и Лесом, отдаёт энергию ослабевшим соседям.',
+'Несётся по прямой и питается движением, на препятствии меняет курс. Единственный, кто точит Камень.',
+'Стоит на месте и уничтожает Чуму и Маток рядом. Крепнет у Камня.',
+'Стена. Не ест, не стареет, медленно стачивается Потоком. Новые камни рожают Матки.',
+'Заражает соседей, превращая их в себя, и быстро выгорает.',
+'Бродит и рожает: половина детей — самого редкого цвета мира. Изредка возникает из пустоты.',
+'Липнет к сытой жертве и тянет из неё энергию. Выпивший досуха размножается.'];
+const VERB=['ест','поджигает','','ест','','','ест','ест','','заражает','ест','пьёт'];
+const PASSIVE=new Set([2,4,5,8]);
+const RGB=new Uint8Array(36);const CSS=[];
+for(let t=0;t<12;t++){const h=t*300/11,s=.9,l=t===8?.5:.55;const a=s*Math.min(l,1-l);const f=n=>{const k=(n+h/30)%12;return l-a*Math.max(-1,Math.min(k-3,9-k,1))};
+ RGB[t*3]=f(0)*255;RGB[t*3+1]=f(8)*255;RGB[t*3+2]=f(4)*255;CSS[t]=`rgb(${RGB[t*3]},${RGB[t*3+1]},${RGB[t*3+2]})`}
+const preyOf=t=>PASSIVE.has(t)?[]:[1,2,3].map(d=>(t+d)%12).filter(b=>canEat(t,b));
+const threatOf=t=>[1,2,3].map(d=>(t-d+12)%12).filter(a=>!PASSIVE.has(a)&&canEat(a,t));
+const dots=a=>a.length?a.map(x=>`<i class="dot" style="background:${CSS[x]}" title="${NAMES[x]}"></i>`).join(''):'<span>никого</span>';
+
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stage=document.getElementById('stage');
+let img,trT,trI,sel=0,tool='brush',sizes=[1,3,5,8],si=1,running=true,speeds=[1,2,4],spi=0,harmony=0,best=0;
+try{best=+localStorage.getItem('chromo-best')||0}catch(e){}
+let field=[6,8,22];
+function readField(){const v=getComputedStyle(document.documentElement).getPropertyValue('--field-rgb').split(',').map(Number);if(v.length===3&&!v.some(isNaN))field=v}
+readField();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',readField);
+
+function build(){const r=stage.getBoundingClientRect();const w=Math.max(200,r.width-16),h=Math.max(200,r.height);
+ const cell=Math.max(3,Math.ceil(Math.sqrt(w*h/15000)));initWorld(Math.floor(w/cell),Math.floor(h/cell));
+ cv.width=W;cv.height=H;img=ctx.createImageData(W,H);trT=new Int8Array(N).fill(-1);trI=new Float32Array(N);seedWorld(.3);harmony=0;fit()}
+function fit(){const r=stage.getBoundingClientRect();const c=Math.min((r.width-16)/W,r.height/H);cv.style.width=(W*c)+'px';cv.style.height=(H*c)+'px'}
+addEventListener('resize',fit);
+
+function render(){const d=img.data,fr=field[0],fg=field[1],fb=field[2];
+ for(let i=0,p=0;i<N;i++,p+=4){const t=type[i];
+  if(t>=0){const f=t===8?1:.5+.5*Math.min(1,en[i]/50);d[p]=RGB[t*3]*f;d[p+1]=RGB[t*3+1]*f;d[p+2]=RGB[t*3+2]*f;trT[i]=t;trI[i]=1}
+  else{let k=trI[i];if(k>.02){k*=.88;trI[i]=k;const tt=trT[i];let r,g,b;if(tt===-2){r=g=b=255;k*=1.6}else{r=RGB[tt*3];g=RGB[tt*3+1];b=RGB[tt*3+2];k*=.35}k=Math.min(1,k);
+    d[p]=fr+(r-fr)*k;d[p+1]=fg+(g-fg)*k;d[p+2]=fb+(b-fb)*k}else{trI[i]=0;d[p]=fr;d[p+1]=fg;d[p+2]=fb}}
+  d[p+3]=255}
+ ctx.putImageData(img,0,0)}
+
+const pal=document.getElementById('pal'),info=document.getElementById('info'),pop=document.getElementById('pop');
+for(let t=0;t<12;t++){const b=document.createElement('button');b.className='sw'+(t===0?' on':'');b.setAttribute('aria-label',NAMES[t]+', '+ROLES[t]);b.innerHTML=`<i style="background:${CSS[t]}"></i><span>0</span>`;
+ b.onclick=()=>{sel=t;[...pal.children].forEach((c,k)=>c.classList.toggle('on',k===t));setTool('brush');showInfo()};pal.appendChild(b);
+ const s=document.createElement('i');s.style.background=CSS[t];pop.appendChild(s)}
+function showInfo(){const t=sel,pr=preyOf(t),th=threatOf(t);
+ info.innerHTML=`<div class="nm"><i class="dot" style="background:${CSS[t]};width:14px;height:14px;border-radius:4px"></i>${ROLES[t]} <em>${NAMES[t].toLowerCase()}</em></div><p>${DESC[t]}</p>
+ <div class="rel"><span>${pr.length?VERB[t][0].toUpperCase()+VERB[t].slice(1):'Не нападает'} ${pr.length?dots(pr):''}</span><span>Под угрозой ${dots(th)}</span></div>`}
+document.getElementById('rlist').innerHTML=NAMES.map((n,t)=>`<div class="row"><i class="dot" style="background:${CSS[t]}"></i><div><b>${ROLES[t]}</b> <small>${n.toLowerCase()}</small><br>${DESC[t]}<br><small>${preyOf(t).length?VERB[t][0].toUpperCase()+VERB[t].slice(1)+': '+preyOf(t).map(x=>ROLES[x]).join(', '):'Ни на кого не нападает'}. Под угрозой от: ${threatOf(t).map(x=>ROLES[x]).join(', ')||'никого'}.</small></div></div>`).join('');
+
+function setTool(tl){tool=tl;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('on',b.dataset.tool===tl))}
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
+const lSize=document.getElementById('lSize');
+document.getElementById('bSize').onclick=()=>{si=(si+1)%sizes.length;lSize.textContent='Кисть '+(sizes[si]*2-1)};
+lSize.textContent='Кисть '+(sizes[si]*2-1);
+document.getElementById('bPlay').onclick=()=>{running=!running;document.getElementById('iPlay').textContent=running?'⏸':'▶️';document.getElementById('lPlay').textContent=running?'Пауза':'Пуск'};
+document.getElementById('bSpeed').onclick=()=>{spi=(spi+1)%speeds.length;document.getElementById('lSpeed').textContent='×'+speeds[spi]};
+document.getElementById('bNew').onclick=()=>{seedWorld(.3);voidLife=true;trT.fill(-1);trI.fill(0);harmony=0;tick=0};
+document.getElementById('bClear').onclick=()=>{type.fill(-1);voidLife=false;trT.fill(-1);trI.fill(0);counts.fill(0);harmony=0;hud()};
+const rules=document.getElementById('rules');
+document.getElementById('bRules').onclick=()=>rules.classList.add('open');
+document.getElementById('bClose').onclick=()=>rules.classList.remove('open');
+
+let down=false,px=0,py=0;
+function apply(first){const r=sizes[si]-1,r2=(r+.5)*(r+.5);
+ for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){if(dx*dx+dy*dy>r2)continue;const x=(px+dx+W)%W,y=(py+dy+H)%H,i=y*W+x;
+  if(tool==='brush'){if(r===0||Math.random()<.35){spawn(i,sel,40);stamp[i]=0}}
+  else if(tool==='bolt'){type[i]=-1;trT[i]=-2;trI[i]=1}
+  else if(type[i]>=0&&type[i]!==8){en[i]=100;age[i]=0}}}
+function pos(e){const r=cv.getBoundingClientRect();px=Math.max(0,Math.min(W-1,Math.floor((e.clientX-r.left)/r.width*W)));py=Math.max(0,Math.min(H-1,Math.floor((e.clientY-r.top)/r.height*H)))}
+cv.addEventListener('pointerdown',e=>{down=true;cv.setPointerCapture(e.pointerId);pos(e);apply(true)});
+cv.addEventListener('pointermove',e=>{if(!down)return;pos(e);apply(false)});
+const up=()=>{down=false};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+
+const sTick=document.getElementById('sTick'),sPop=document.getElementById('sPop'),sCol=document.getElementById('sCol'),hNow=document.getElementById('hNow'),hBest=document.getElementById('hBest');
+function hud(){let tot=0,alive=0;for(let t=0;t<12;t++){tot+=counts[t];if(counts[t]>0)alive++}
+ sTick.textContent=tick;sPop.textContent=tot;sCol.textContent=alive+'/12';hNow.textContent=harmony;hBest.textContent=best;
+ for(let t=0;t<12;t++){pop.children[t].style.width=(tot?counts[t]/tot*100:0)+'%';const s=pal.children[t];s.lastChild.textContent=counts[t];s.classList.toggle('dead',counts[t]===0)}}
+let last=performance.now(),acc=0,frame=0;
+function loop(now){const dt=Math.min(100,now-last);last=now;
+ if(running){acc+=dt;const iv=1000/(30*speeds[spi]);let n=0;while(acc>=iv&&n<8){step();n++;acc-=iv;
+  let all=true;for(let t=0;t<12;t++)if(counts[t]===0){all=false;break}
+  harmony=all?harmony+1:0;if(harmony>best){best=harmony;if(best%30===0)try{localStorage.setItem('chromo-best',best)}catch(e){}}}
+  if(n===8)acc=0}
+ if(down&&tool!=='bolt'&&frame%3===0)apply(false);
+ render();if(frame++%8===0)hud();requestAnimationFrame(loop)}
+build();step();showInfo();hud();requestAnimationFrame(loop);
+</script></body></html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Betamodern Games</title>
+<meta name="description" content="Пет-игры Павла Черкуна: стратегии, головоломки, симуляторы и приключения прямо в браузере. Оценки и отзывы — через Telegram.">
+<meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f3f1" media="(prefers-color-scheme: light)">
+<meta property="og:title" content="Betamodern Games">
+<meta property="og:description" content="Игры в вечной бете. Играй в браузере, оценивай в Telegram.">
+<meta property="og:image" content="assets/logo-512.png">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Betamodern">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="application-name" content="Betamodern Games">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">К играм</a>
+<header class="bar">
+  <a class="brand" href="#/" aria-label="Betamodern Games, на главную">
+    <img src="assets/logo-192.png" alt="" width="40" height="40">
+    <span>Betamodern Games</span>
+  </a>
+  <nav class="bar-nav" aria-label="Разделы">
+    <a href="#/" data-nav="games">Игры</a>
+    <a href="#/shorts" data-nav="shorts">Shorts</a>
+    <a href="#/favorites" data-nav="favorites">Избранное<sup data-favcount></sup></a>
+    <a href="#/about" data-nav="about">О каталоге</a>
+  </nav>
+  <div class="bar-act">
+    <button class="icon-btn" id="theme" type="button" aria-label="Сменить тему">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z" fill="currentColor"/></svg>
+    </button>
+    <a class="btn btn-ghost tg-link" id="tgTop" href="#/about" hidden>Канал в Telegram</a>
+  </div>
+</header>
+
+<main id="main">
+  <noscript><p class="wrap">Каталог собирается скриптом. Включи JavaScript или открой игры прямо: <a href="https://pavel-cherkun.github.io/">pavel-cherkun.github.io</a>.</p></noscript>
+  <div id="view"></div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-word" aria-hidden="true">Betamodern<br>Games</p>
+    <div class="foot-cols">
+      <p>Пет-игры Павла Черкуна. Всё в вечной бете: ничего не доделано до конца, всё растёт от твоих отзывов.</p>
+      <p><a href="https://github.com/pavel-cherkun">GitHub</a> · <a href="#/about">Как оставить отзыв</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="sheet" id="sheet" hidden></div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="icon-btn lb-close" type="button" aria-label="Закрыть">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </button>
+  <button class="icon-btn lb-prev" type="button" aria-label="Предыдущий кадр">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </button>
+  <img alt="">
+  <button class="icon-btn lb-next" type="button" aria-label="Следующий кадр">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+  </button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "id": "./",
+  "name": "Betamodern Games",
+  "short_name": "Betamodern",
+  "description": "Пет-игры Павла Черкуна: играй в браузере, оценивай в Telegram.",
+  "lang": "ru",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#0b0b0c",
+  "theme_color": "#0b0b0c",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    { "src": "assets/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Shorts", "url": "./#/shorts", "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192" }] },
+    { "name": "Избранное", "url": "./#/favorites", "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192" }] }
+  ],
+  "screenshots": [
+    { "src": "assets/games/vibe/1.jpg", "sizes": "739x1600", "type": "image/jpeg", "form_factor": "narrow" },
+    { "src": "assets/games/katars/1.jpg", "sizes": "1600x900", "type": "image/jpeg", "form_factor": "wide" }
+  ]
+}

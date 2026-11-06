@@ -1,0 +1,542 @@
+{
+  "catalog": {
+    "title": "Betamodern Games",
+    "tagline": "Игры в вечной бете",
+    "about": "Пет-игры Павла Черкуна. Каждая собрана в браузере, каждая ещё растёт, и каждая ждёт твоей оценки.",
+    "telegram": {
+      "channel": null,
+      "bot": null,
+      "miniapp": null
+    },
+    "updated": "2026-11-06",
+    "featured": "pepel"
+  },
+  "genres": [
+    {
+      "id": "sim",
+      "name": "Симуляторы"
+    },
+    {
+      "id": "strategy",
+      "name": "Стратегии"
+    },
+    {
+      "id": "puzzle",
+      "name": "Головоломки"
+    },
+    {
+      "id": "adventure",
+      "name": "Приключения"
+    },
+    {
+      "id": "words",
+      "name": "Слова"
+    }
+  ],
+  "games": [
+    {
+      "id": "katars",
+      "title": "Катарсалгос",
+      "hook": "Невский сияет, пока не снимешь имплант.",
+      "genres": [
+        "adventure"
+      ],
+      "platform": "desktop",
+      "orientation": "landscape",
+      "status": "dev",
+      "url": null,
+      "repo": null,
+      "world": "V-003",
+      "accent": "#E85BC0",
+      "description": "Санкт-Петербург, 2098. У каждого жителя в глазах имплант дополненной реальности: сквозь него город сияет неоном. Сними его, и увидишь серый асфальт. Дойти до Свободной зоны можно, только переключая слои: в AR голограммы твёрдые, в реальности их нет.",
+      "features": [
+        "Два слоя одного города: AR и реальность",
+        "Проход, который есть только без импланта",
+        "Рейтинг гражданина, который падает, когда ты выключаешь слой"
+      ],
+      "controls": "WASD, пробел, Q — снять или надеть имплант",
+      "icon": null,
+      "cover": "assets/games/katars/1.jpg",
+      "shots": [
+        "assets/games/katars/1.jpg",
+        "assets/games/katars/2.jpg",
+        "assets/games/katars/3.jpg"
+      ],
+      "video": "assets/games/katars/video.mp4",
+      "poster": "assets/games/katars/poster.jpg",
+      "source": "ПЕТ-ПРОЕКТЫ/катарс/prototype",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 55%"
+    },
+    {
+      "id": "courier",
+      "title": "The Courier",
+      "hook": "Вечная зима, сфера Дайсона и заказ на одну доставку.",
+      "genres": [
+        "adventure",
+        "sim"
+      ],
+      "platform": "desktop",
+      "orientation": "landscape",
+      "status": "dev",
+      "url": null,
+      "repo": null,
+      "world": "V-001.993",
+      "accent": "#E87722",
+      "description": "Киберпанк-город поделён корпорациями, у которых нет имён, только цвета. Ты начинаешь с каморки и самоката: развозишь заказы, уходишь от погонь и поднимаешься от курьера до синдиката. Изометрия на самокате, пиксельная улица пешком.",
+      "features": [
+        "Изометрический город и 2.5D-улица в одном мире",
+        "Погони, диалоги и своя каморка",
+        "Пиксель-арт по листам художника вебтуна «вт»"
+      ],
+      "controls": "WASD, E — слезть или зайти, M — карта",
+      "icon": null,
+      "cover": "assets/games/courier/1.jpg",
+      "shots": [
+        "assets/games/courier/1.jpg",
+        "assets/games/courier/2.jpg",
+        "assets/games/courier/3.jpg",
+        "assets/games/courier/4.jpg"
+      ],
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/курьер/город",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 60%"
+    },
+    {
+      "id": "pepel",
+      "title": "Война с энтропией",
+      "hook": "Истины нет. Есть то, что ты удержишь.",
+      "genres": [
+        "strategy"
+      ],
+      "platform": "both",
+      "orientation": "landscape",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/pepelny-predel/",
+      "repo": "pavel-cherkun/pepelny-predel",
+      "world": "V-04x",
+      "accent": "#E87722",
+      "description": "Изометрическая стратегия о постапокалипсисе, где девять рас делят одну карту. Глава первая начинается с лампы: последняя лампочка на сто вёрст, и дед бережёт её двадцать лет. Подземелье, земля и небо — три слоя одной войны.",
+      "features": [
+        "Девять рас на одной карте",
+        "Кампания по главам",
+        "Удобно и с телефона, и с мыши"
+      ],
+      "controls": "Тап или клик по земле, карта слоёв внизу",
+      "icon": "assets/games/pepel/icon.png",
+      "cover": "assets/games/pepel/hero.jpg",
+      "shots": [
+        "assets/games/pepel/hero.jpg",
+        "assets/games/pepel/2.jpg",
+        "assets/games/pepel/world.jpg",
+        "assets/games/pepel/3.jpg",
+        "assets/games/pepel/c1.jpg",
+        "assets/games/pepel/c3.jpg",
+        "assets/games/pepel/c5.jpg"
+      ],
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/третий квадртаный/pepel",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 50%"
+    },
+    {
+      "id": "vibe",
+      "title": "Vibe City",
+      "hook": "Всё в одном приложении. Включая тебя.",
+      "genres": [
+        "sim"
+      ],
+      "platform": "phone",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/vibe/",
+      "repo": "pavel-cherkun/vibe",
+      "world": "V-002",
+      "accent": "#A8E05F",
+      "description": "Сатирический супер-апп: банк, такси, доставка, работа, знакомства и жильё в одном приложении, а Корпорация очень о тебе заботится. Тамагочи, RPG и песочница цифровой жизни. Станешь легендой города или обанкротишься.",
+      "features": [
+        "Восемь навыков и три концовки",
+        "Двенадцать жителей со своим режимом дня",
+        "Вайбот, который всегда рядом"
+      ],
+      "controls": "Телефон, одна рука",
+      "icon": "assets/games/vibe/icon.png",
+      "cover": "assets/games/vibe/5.jpg",
+      "shots": [
+        "assets/games/vibe/1.jpg",
+        "assets/games/vibe/2.jpg",
+        "assets/games/vibe/3.jpg",
+        "assets/games/vibe/4.jpg",
+        "assets/games/vibe/5.jpg"
+      ],
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/поп-гейм/vibe",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 0%"
+    },
+    {
+      "id": "drift",
+      "title": "DRIFT",
+      "hook": "Пустошь из блоков, дрон и грязная работа.",
+      "genres": [
+        "adventure"
+      ],
+      "platform": "desktop",
+      "orientation": "landscape",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/drift/",
+      "repo": "pavel-cherkun/drift",
+      "world": "за V-003",
+      "accent": "#E87722",
+      "description": "Изометрическая игра про мусорщика с дроном. Высаживаешься в воксельную пустошь, буришь, ищешь шахты под жёлтыми лучами и уходишь на эвакуацию с добычей. В трюме — мастерская: merge, алхимия и сборка дрона по форме.",
+      "features": [
+        "Высадка, шахта и полигон головоломок",
+        "Мастерская с четырнадцатью рецептами",
+        "Компоновка модулей дрона 3×3"
+      ],
+      "controls": "WASD, мышь, Shift — рывок",
+      "icon": null,
+      "cover": "assets/games/drift/1.jpg",
+      "shots": [
+        "assets/games/drift/1.jpg",
+        "assets/games/drift/2.jpg",
+        "assets/games/drift/3.jpg"
+      ],
+      "video": "assets/games/drift/video.mp4",
+      "poster": "assets/games/drift/poster.jpg",
+      "source": "ПЕТ-ПРОЕКТЫ/поп-гейм/drift",
+      "tg": {
+        "post": null
+      }
+    },
+    {
+      "id": "orbita",
+      "title": "Космологистика",
+      "hook": "Логистика, где маршрут дышит вместе с планетами.",
+      "genres": [
+        "strategy",
+        "puzzle"
+      ],
+      "platform": "phone",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/kosmologistika/",
+      "repo": "pavel-cherkun/kosmologistika",
+      "world": "V-002",
+      "accent": "#5BB8F0",
+      "description": "Mini Metro в движущейся звёздной системе. Сначала разведчик пробивает трассу по гравитации, потом по ней ходят грузовики. Корабли честно летят по физике: огибают звезду, ловят пращу у гиганта и ждут окна запуска.",
+      "features": [
+        "Честная гравитация вместо нарисованных линий",
+        "Станции на орбитах, у лун и в точках Лагранжа",
+        "Недели с выбором улучшения"
+      ],
+      "controls": "Тяни от планеты, чтобы запустить разведчика",
+      "icon": null,
+      "cover": "assets/games/orbita/1.jpg",
+      "shots": [
+        "assets/games/orbita/1.jpg",
+        "assets/games/orbita/2.jpg",
+        "assets/games/orbita/3.jpg"
+      ],
+      "video": "assets/games/orbita/video.mp4",
+      "poster": "assets/games/orbita/poster.jpg",
+      "source": "ПЕТ-ПРОЕКТЫ/Космологистика",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 0%"
+    },
+    {
+      "id": "palitra",
+      "title": "Палитра",
+      "hook": "Красный плюс жёлтый — и очередь накормлена.",
+      "genres": [
+        "puzzle"
+      ],
+      "platform": "both",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/palitra/",
+      "repo": "pavel-cherkun/palitra",
+      "world": "V-002",
+      "accent": "#E85BC0",
+      "description": "Гиперказуальная логистика цветов. Тянешь ленты от источников к приёмникам, белый смеситель делает из двух цветов третий, чёрный разделитель разбирает обратно. Каждый приёмник всё время голоден, и кольцо голода растёт.",
+      "features": [
+        "Ленты кистью, развилки и мосты",
+        "Смесители и разделители прямо на ленту",
+        "Бесконечный режим и рекорд"
+      ],
+      "controls": "Палец или мышь",
+      "icon": null,
+      "cover": "assets/games/palitra/3.jpg",
+      "shots": [
+        "assets/games/palitra/1.jpg",
+        "assets/games/palitra/2.jpg",
+        "assets/games/palitra/3.jpg"
+      ],
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/Логистика",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 35%"
+    },
+    {
+      "id": "uyutnye-lite",
+      "title": "Уютные слова",
+      "hook": "Сбей блок, сложи слово, получи вещь.",
+      "genres": [
+        "words",
+        "puzzle"
+      ],
+      "platform": "phone",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/uyutnye-slova-lite/",
+      "repo": "pavel-cherkun/uyutnye-slova-lite",
+      "world": "V-002",
+      "accent": "#A8E05F",
+      "description": "Три игры одной цепочкой. В «Блоках» добываешь буквы, в «Эрудите» собираешь из них слова, и каждое слово становится вещью. В «Три в ряд» вещи превращаются в фишки: сто уровней, каждый десятый — босс.",
+      "features": [
+        "458 вещей из слов",
+        "Сто уровней в десяти главах",
+        "Прогресс хранится в браузере"
+      ],
+      "controls": "Телефон, одна рука",
+      "icon": "assets/games/uyutnye-lite/icon.png",
+      "cover": "assets/games/uyutnye-lite/1.jpg",
+      "shots": [
+        "assets/games/uyutnye-lite/1.jpg",
+        "assets/games/uyutnye-lite/2.jpg",
+        "assets/games/uyutnye-lite/3.jpg",
+        "assets/games/uyutnye-lite/4.jpg",
+        "assets/games/uyutnye-lite/5.jpg"
+      ],
+      "video": "assets/games/uyutnye-lite/video.mp4",
+      "poster": "assets/games/uyutnye-lite/poster.jpg",
+      "source": "ПЕТ-ПРОЕКТЫ/Уютные слова лайт",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 0%"
+    },
+    {
+      "id": "uyutnye",
+      "title": "Уютные слова: квартира",
+      "hook": "Слово «кухня» открывает кухню.",
+      "genres": [
+        "words",
+        "sim"
+      ],
+      "platform": "phone",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/uyutnye-slova/",
+      "repo": "pavel-cherkun/uyutnye-slova",
+      "world": "V-002",
+      "accent": "#E85BC0",
+      "description": "Большая версия «Уютных слов»: пять мини-игр перерабатывают добычу друг друга, а собранные вещи обставляют квартиру. Комнаты открываются словами, соседи присылают заказы, печь переплавляет дубли в энергию.",
+      "features": [
+        "Пять связанных мини-игр",
+        "Квартира, которая обставляется словами",
+        "Заказы соседей и редкие вещи"
+      ],
+      "controls": "Телефон, одна рука",
+      "icon": "assets/games/uyutnye/icon.png",
+      "cover": "assets/games/uyutnye/1.jpg",
+      "shots": [
+        "assets/games/uyutnye/1.jpg"
+      ],
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/для Риты",
+      "tg": {
+        "post": null
+      },
+      "focus": "50% 0%"
+    },
+    {
+      "id": "geksa-6",
+      "title": "Гекса-6",
+      "hook": "Игра «Жизнь» на сотах, где атомы сталкиваются, смешиваются и охотятся.",
+      "genres": [
+        "sim"
+      ],
+      "platform": "desktop",
+      "orientation": "landscape",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/geksa-6/",
+      "repo": "https://github.com/pavel-cherkun/geksa-6",
+      "accent": "#F26B3A",
+      "description": "Клеточный автомат на гексагональной сетке: три базовых цвета, три смеси, три плазмы. Температура и гравитация меняют химию, энергия сохраняется.",
+      "features": [
+        "9 видов атомов",
+        "Температура и гравитация",
+        "Подробная статистика реакций"
+      ],
+      "controls": "Ползунки и кнопки, клик по полю",
+      "world": "V-002",
+      "icon": null,
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/Мини-игры/geksa-6",
+      "tg": {
+        "post": null
+      },
+      "cover": "assets/games/geksa-6/cover.jpg",
+      "shots": [
+        "assets/games/geksa-6/1.jpg",
+        "assets/games/geksa-6/2.jpg"
+      ]
+    },
+    {
+      "id": "termoyad",
+      "title": "Термояд",
+      "hook": "Сливай ядра в звезде, пока она не дойдёт до железа и не взорвётся.",
+      "genres": [
+        "sim"
+      ],
+      "platform": "both",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/termoyad/",
+      "repo": "https://github.com/pavel-cherkun/termoyad",
+      "accent": "#F5C542",
+      "description": "Idle-«арбуз» про нуклеосинтез: роняешь ядра в звезду, одинаковые сливаются в следующий элемент, копишь МэВ, прокачиваешь реактор и переходишь от жёлтого карлика к сверхновой.",
+      "features": [
+        "Лестница элементов от водорода до железа",
+        "Апгрейды реактора",
+        "Звёзды разных классов и сверхновая"
+      ],
+      "controls": "Тап по звезде",
+      "world": "V-002",
+      "icon": null,
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/Мини-игры/termoyad",
+      "tg": {
+        "post": null
+      },
+      "cover": "assets/games/termoyad/1.jpg",
+      "shots": [
+        "assets/games/termoyad/1.jpg",
+        "assets/games/termoyad/2.jpg",
+        "assets/games/termoyad/3.jpg"
+      ],
+      "focus": "50% 0%"
+    },
+    {
+      "id": "merdzhiki",
+      "title": "Мерджики",
+      "hook": "Тапай генератор, тяни одинаковых друг на друга, сдавай заказы.",
+      "genres": [
+        "puzzle"
+      ],
+      "platform": "both",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/merdzhiki/",
+      "repo": "https://github.com/pavel-cherkun/merdzhiki",
+      "accent": "#B8F040",
+      "description": "Классическая мердж-игра на поле 7×7: генераторы, цепочки предметов, заказы, коллекция и магазин.",
+      "features": [
+        "Цепочки предметов и коллекция",
+        "Заказы с наградами",
+        "Энергия и уровни"
+      ],
+      "controls": "Тап и перетаскивание",
+      "world": "V-002",
+      "icon": null,
+      "video": null,
+      "poster": null,
+      "source": "ПЕТ-ПРОЕКТЫ/Мини-игры/merdzhiki",
+      "tg": {
+        "post": null
+      },
+      "cover": "assets/games/merdzhiki/1.jpg",
+      "shots": [
+        "assets/games/merdzhiki/1.jpg",
+        "assets/games/merdzhiki/2.jpg"
+      ],
+      "focus": "50% 0%"
+    }
+  ],
+  "shorts": [
+    {
+      "id": "merdzhiki",
+      "title": "Мерджики",
+      "hook": "Тапай генератор, тяни одинаковых друг на друга.",
+      "src": "https://pavel-cherkun.github.io/merdzhiki/",
+      "poster": "shorts/merdzhiki/poster.jpg",
+      "accent": "#E85BC0",
+      "controls": "Тап и перетаскивание",
+      "tg": {
+        "post": null
+      },
+      "game": "merdzhiki"
+    },
+    {
+      "id": "khromogenez",
+      "title": "Хромогенез",
+      "hook": "Двенадцать цветов едят друг друга по кругу. Удержи всех живыми.",
+      "src": "shorts/khromogenez/index.html",
+      "poster": "shorts/khromogenez/poster.jpg",
+      "accent": "#A8E05F",
+      "controls": "Кисть, молния и благодать",
+      "tg": {
+        "post": null
+      }
+    },
+    {
+      "id": "palitra",
+      "title": "Палитра",
+      "hook": "Красный плюс жёлтый — и очередь накормлена.",
+      "src": "https://pavel-cherkun.github.io/palitra/",
+      "poster": "shorts/palitra/poster.jpg",
+      "accent": "#E85BC0",
+      "controls": "Тяни ленты пальцем",
+      "game": "palitra",
+      "tg": {
+        "post": null
+      }
+    },
+    {
+      "id": "bastion",
+      "title": "Бастион",
+      "hook": "Сливай солдат, пока деревянная стена не станет нанотехнологичной.",
+      "src": "shorts/bastion/index.html",
+      "poster": "shorts/bastion/poster.jpg",
+      "accent": "#E87722",
+      "controls": "Перетаскивай солдат",
+      "tg": {
+        "post": null
+      }
+    },
+    {
+      "id": "termoyad",
+      "title": "Термояд",
+      "hook": "Сливай ядра в звезде, пока она не дойдёт до железа.",
+      "src": "https://pavel-cherkun.github.io/termoyad/",
+      "poster": "shorts/termoyad/poster.jpg",
+      "accent": "#5BB8F0",
+      "controls": "Тап по звезде",
+      "tg": {
+        "post": null
+      },
+      "game": "termoyad"
+    }
+  ]
+}
