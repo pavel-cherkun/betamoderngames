@@ -16,7 +16,7 @@ import crypto from 'node:crypto';
 const TOKEN = process.env.TG_BOT_TOKEN;
 const SALT = process.env.TG_SALT || 'betamodern';
 const ADMIN = process.env.TG_ADMIN_ID ? Number(process.env.TG_ADMIN_ID) : null;
-if (!TOKEN) { console.error('Нет TG_BOT_TOKEN'); process.exit(1); }
+if (!TOKEN) { console.log('TG_BOT_TOKEN ещё не задан, пропускаю'); process.exit(0); }
 
 const read = (p, d) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return d; } };
 const write = (p, v) => fs.writeFileSync(p, JSON.stringify(v, null, 2) + '\n');
