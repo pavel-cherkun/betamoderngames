@@ -1,5 +1,5 @@
 {
-  "updated": null,
-  "source": "Сюда раз в час пишет GitHub Action из Telegram (см. ОТЗЫВЫ.md). Руками не править.",
+  "updated": "2026-11-06T21:59:55.033Z",
+  "source": "Пишет tools/telegram-sync.mjs. Руками не править.",
   "games": {}
 }
