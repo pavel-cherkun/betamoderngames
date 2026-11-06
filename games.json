@@ -5,7 +5,7 @@
     "about": "Пет-игры Павла Черкуна. Каждая собрана в браузере, каждая ещё растёт, и каждая ждёт твоей оценки.",
     "telegram": {
       "channel": null,
-      "bot": null,
+      "bot": "BetamodernGamesBot",
       "miniapp": null
     },
     "updated": "2026-11-06",
