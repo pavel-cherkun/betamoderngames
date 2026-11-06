@@ -214,29 +214,21 @@
 
   /* ---------- главная ---------- */
   function home() {
-    const f = DATA.games.find(g => g.id === DATA.catalog.featured) || DATA.games[0];
-    const fs = scoreOf(f.id);
     const list = DATA.games.filter(g =>
       (state.genre === 'all' || g.genres.includes(state.genre)) &&
       (state.platform === 'all' || g.platform === state.platform || g.platform === 'both'));
     const count = id => DATA.games.filter(g => g.genres.includes(id)).length;
     view.innerHTML = `
-    <section class="wrap hero" aria-labelledby="h-feat">
-      <a href="#/game/${f.id}" class="rise" aria-label="${esc(f.title)}: подробнее">${echo(
-        f.video ? `<video src="${f.video}" poster="${f.poster || f.cover}" muted loop playsinline autoplay></video>` : `<img src="${f.cover}" alt="" style="object-position:${f.focus || '50% 50%'}">`,
-        'hero-media on')}</a>
-      <div class="hero-txt">
-        <h1 id="h-feat" class="rise" style="--i:1">${esc(f.title)}</h1>
-        <p class="hook rise" style="--i:2">${esc(f.hook)} ${esc(f.description.split('. ')[0])}.</p>
-        <p class="meta rise" style="--i:3">${fs ? `<span class="stars">${STAR}${fmt(fs.avg)}</span> · ` : ''}${esc(genreNames(f))} · ${PLATFORM[f.platform]}</p>
-        <div class="hero-act rise" style="--i:4">${playBtn(f)}<a class="btn btn-ghost" href="#/game/${f.id}">Кадры и отзывы</a>${likeBtn(f.id, 'big')}</div>
-      </div>
+    <section class="wrap intro" aria-labelledby="h-home">
+      <h1 id="h-home" class="rise">Betamodern Games</h1>
+      <p class="rise" style="--i:1">Игры в вечной бете. Играй в браузере, оценивай в Telegram.</p>
     </section>
 
     <section class="wrap shorts-shelf" aria-labelledby="h-shorts">
       <div class="shelf-head">
         <h2 id="h-shorts" class="rise">Shorts</h2>
         <p class="rise" style="--i:1">Игры на одну минуту. Листай ленту, как ролики, а понравилась — нажми «Играть».</p>
+        <a class="btn btn-ghost rise" style="--i:2" href="#/shorts">Смотреть ленту</a>
       </div>
       <div class="short-row">${DATA.shorts.map(shortTile).join('')}</div>
     </section>
@@ -268,7 +260,7 @@
         <li class="rise" style="--i:3"><b>Напиши, что сломалось</b>Пара слов боту или комментарий под постом игры. Автор прочитает всё.</li>
       </ol>
     </section>`;
-    if (!installHidden()) $('.hero', view).after(installCard());
+    if (!installHidden()) $('.shorts-shelf', view).after(installCard());
     view.querySelectorAll('[data-genre]').forEach(b => b.onclick = () => { state.genre = b.dataset.genre; saveFilters(); home(); });
     view.querySelectorAll('[data-platform]').forEach(b => b.onclick = () => { state.platform = b.dataset.platform; saveFilters(); home(); });
     reveal();
