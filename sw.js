@@ -1,6 +1,6 @@
 /* Service worker: витрина ставится как приложение и открывается без сети.
    Оболочка — из кэша, данные (games.json, ratings.json) — сначала из сети, картинки — из кэша по мере просмотра. */
-const V = 'bm-v4';
+const V = 'bm-v5';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'games.json', 'manifest.webmanifest',
   'assets/logo-192.png', 'assets/logo-512.png', 'assets/favicon.png', 'assets/apple-touch-icon.png'];
 

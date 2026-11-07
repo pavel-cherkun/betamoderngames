@@ -213,24 +213,17 @@
     : `<span class="btn" aria-disabled="true">В разработке</span>`;
 
   /* ---------- главная ---------- */
+  const filtered = () => DATA.games.filter(g =>
+    (state.genre === 'all' || g.genres.includes(state.genre)) &&
+    (state.platform === 'all' || g.platform === state.platform || g.platform === 'both'));
+  const gridHTML = list => list.length ? list.map(tile).join('') : '<p class="empty">Под такой фильтр пока ничего нет. Сними один из фильтров.</p>';
   function home() {
-    const list = DATA.games.filter(g =>
-      (state.genre === 'all' || g.genres.includes(state.genre)) &&
-      (state.platform === 'all' || g.platform === state.platform || g.platform === 'both'));
+    const list = filtered();
     const count = id => DATA.games.filter(g => g.genres.includes(id)).length;
     view.innerHTML = `
     <section class="wrap intro" aria-labelledby="h-home">
       <h1 id="h-home" class="rise">Betamodern Games</h1>
       <p class="rise" style="--i:1">Игры в вечной бете. Играй в браузере, оценивай в Telegram.</p>
-    </section>
-
-    <section class="wrap shorts-shelf" aria-labelledby="h-shorts">
-      <div class="shelf-head">
-        <h2 id="h-shorts" class="rise">Shorts</h2>
-        <p class="rise" style="--i:1">Игры на одну минуту. Листай ленту, как ролики, а понравилась — нажми «Играть».</p>
-        <a class="btn btn-ghost rise" style="--i:2" href="#/shorts">Смотреть ленту</a>
-      </div>
-      <div class="short-row">${DATA.shorts.map(shortTile).join('')}</div>
     </section>
 
     <section class="wrap shelf" id="games" aria-labelledby="h-games">
@@ -246,7 +239,16 @@
           ${[['all', 'Везде'], ['phone', 'Телефон'], ['desktop', 'Компьютер']].map(([k, v]) => `<button class="chip" data-platform="${k}" aria-pressed="${state.platform === k}">${v}</button>`).join('')}
         </div>
       </div>
-      <div class="grid">${list.length ? list.map(tile).join('') : '<p class="empty">Под такой фильтр пока ничего нет. Сними один из фильтров.</p>'}</div>
+      <div class="grid">${gridHTML(list)}</div>
+    </section>
+
+    <section class="wrap shorts-shelf" aria-labelledby="h-shorts">
+      <div class="shelf-head">
+        <h2 id="h-shorts" class="rise">Shorts</h2>
+        <p class="rise" style="--i:1">Игры на одну минуту. Листай ленту, как ролики, а понравилась — нажми «Играть».</p>
+        <a class="btn btn-ghost rise" style="--i:2" href="#/shorts">Смотреть ленту</a>
+      </div>
+      <div class="short-row">${DATA.shorts.map(shortTile).join('')}</div>
     </section>
 
     <section class="wrap manifest" aria-labelledby="h-how">
@@ -261,8 +263,18 @@
       </ol>
     </section>`;
     if (!installHidden()) $('.shorts-shelf', view).after(installCard());
-    view.querySelectorAll('[data-genre]').forEach(b => b.onclick = () => { state.genre = b.dataset.genre; saveFilters(); home(); });
-    view.querySelectorAll('[data-platform]').forEach(b => b.onclick = () => { state.platform = b.dataset.platform; saveFilters(); home(); });
+    // фильтр меняет только сетку: страница не перерисовывается и не прыгает
+    const refilter = () => {
+      saveFilters();
+      view.querySelectorAll('[data-genre]').forEach(b => b.setAttribute('aria-pressed', b.dataset.genre === state.genre));
+      view.querySelectorAll('[data-platform]').forEach(b => b.setAttribute('aria-pressed', b.dataset.platform === state.platform));
+      const grid = $('#games .grid', view);
+      grid.innerHTML = gridHTML(filtered());
+      grid.querySelectorAll('.rise').forEach(el => el.classList.add('in'));
+      paintLikes();
+    };
+    view.querySelectorAll('[data-genre]').forEach(b => b.onclick = () => { state.genre = b.dataset.genre; refilter(); });
+    view.querySelectorAll('[data-platform]').forEach(b => b.onclick = () => { state.platform = b.dataset.platform; refilter(); });
     reveal();
   }
   const saveFilters = () => { try { sessionStorage.setItem('bm-filters', JSON.stringify(state)); } catch {} };
@@ -275,7 +287,7 @@
     const s = scoreOf(g.id);
     const r = RATINGS.games?.[g.id];
     const post = g.tg?.post;
-    const portrait = g.orientation === 'portrait';
+    const portrait = g.orientation === 'portrait' && (g.video || !g.coverArt); // coverArt — квадратная обложка, её не надо вписывать как экран телефона
     shots = g.shots;
     const media = g.video
       ? `<video src="${g.video}" poster="${g.poster || g.cover}" muted loop playsinline autoplay></video>`
@@ -288,7 +300,7 @@
     <section class="wrap game-top" style="--acc:${g.accent}" aria-labelledby="h-game">
       ${echo(media, `game-media on rise ${portrait ? 'portrait' : ''}`)}
       <div class="game-side">
-        <div class="game-head rise" style="--i:1">${icon(g)}<h1 id="h-game">${esc(g.title)}</h1></div>
+        <div class="game-head rise" style="--i:1">${icon(g)}<h1 id="h-game" style="--len:${Math.max(...g.title.split(/\s+/).map(w => w.length))}">${esc(g.title)}</h1></div>
         <p class="hook rise" style="--i:2">${esc(g.hook)}</p>
         <div class="game-act rise" style="--i:3">
           ${playBtn(g)}${likeBtn(g.id, 'big')}
@@ -549,10 +561,19 @@
     const g = page === 'game' && DATA.games.find(x => x.id === id);
     document.title = g ? `${g.title} — Betamodern Games` : { about: 'О каталоге', favorites: 'Избранное', shorts: 'Shorts' }[page] ? `${{ about: 'О каталоге', favorites: 'Избранное', shorts: 'Shorts' }[page]} — Betamodern Games` : 'Betamodern Games';
     if (inTG && page !== 'shorts') page ? TG.BackButton.show() : TG.BackButton.hide();
-    if (page !== '' || !route.first) scrollTo(0, 0);
+    const y = page !== 'shorts' && history.state?.y;
+    if (y) { view.querySelectorAll('.rise').forEach(el => el.classList.add('in')); scrollTo(0, y); }
+    else if (page !== '' || !route.first) scrollTo(0, 0);
     route.first = false;
   }
   route.first = true;
+
+  // позиция прокрутки живёт в записи истории: «Назад» возвращает туда, где был
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  let yTimer;
+  const saveY = () => { clearTimeout(yTimer); if (!feed) try { history.replaceState({ ...history.state, y: scrollY }, ''); } catch {} };
+  addEventListener('scroll', () => { clearTimeout(yTimer); yTimer = setTimeout(saveY, 200); }, { passive: true });
+  document.addEventListener('click', saveY, true); // успеть записать до перехода по ссылке
 
   Promise.all([
     fetch('games.json').then(r => r.json()),
