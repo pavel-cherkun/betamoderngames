@@ -619,6 +619,19 @@
         "post": null
       },
       "game": "termoyad"
+    },
+    {
+      "id": "fff",
+      "title": "#FFF",
+      "hook": "Складывай цветной свет, пока не выйдет чистый белый.",
+      "src": "https://pavel-cherkun.github.io/fff/",
+      "poster": "shorts/fff/poster.jpg",
+      "accent": "#E040FB",
+      "controls": "Свайпы или стрелки",
+      "tg": {
+        "post": null
+      },
+      "game": "fff"
     }
   ]
 }
