@@ -76,6 +76,41 @@
       }
     },
     {
+      "id": "fff",
+      "title": "#FFF",
+      "hook": "Складывай цветной свет, пока не получится чистый белый.",
+      "genres": [
+        "puzzle"
+      ],
+      "platform": "both",
+      "orientation": "portrait",
+      "status": "live",
+      "url": "https://pavel-cherkun.github.io/fff/",
+      "repo": "pavel-cherkun/fff",
+      "accent": "#E040FB",
+      "description": "Головоломка в духе 2048, только плитки здесь — свет. Они складываются физически, по каналам RGB в линейной яркости: красный и синий дают пурпур, всё вместе — белый. Пересвет за F не сливается, а полосатые фильтры съедают каналы. Цель — собрать #FFF.",
+      "features": [
+        "Сложение света по каналам RGB",
+        "Фильтры, которые съедают каналы",
+        "Декс из 4096 цветов"
+      ],
+      "controls": "Свайп или стрелки",
+      "icon": null,
+      "cover": "assets/games/fff/2.jpg",
+      "shots": [
+        "assets/games/fff/2.jpg",
+        "assets/games/fff/3.jpg",
+        "assets/games/fff/1.jpg"
+      ],
+      "video": null,
+      "poster": null,
+      "focus": "50% 57%",
+      "source": "ПЕТ-ПРОЕКТЫ/Мини-игры/fff",
+      "tg": {
+        "post": null
+      }
+    },
+    {
       "id": "katars",
       "title": "Катарсалгос",
       "hook": "Невский сияет, пока не снимешь имплант.",
